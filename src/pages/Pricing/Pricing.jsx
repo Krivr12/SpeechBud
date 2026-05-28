@@ -34,7 +34,7 @@ const plans = [
     yearlyPrice: 0,
     priceLabel: 'Free',
     description: 'Perfect for trying SpeechBud risk-free. Walang bayad, walang credit card.',
-    cta: 'Magsimula ng Libre',
+    cta: 'Start for Free',
     ctaStyle: 'border-2 border-teal-500 text-teal-600 hover:bg-teal-50',
     features: [
       '1 child profile',
@@ -87,33 +87,33 @@ const plans = [
 ]
 
 // ==========================================
-// FAQ DATA - PH-specific questions
+// FAQ DATA - PH-specific questions in English
 // Update questions and answers here
 // ==========================================
 const faqs = [
   {
-    q: 'May libreng trial ba?',
-    a: 'Oo! Ang Libre plan ay libre habang buhay — walang credit card na kailangan. Ang Pamilya at Pro plans ay may 14-day free trial.',
+    q: 'Is there a free trial?',
+    a: 'Yes! The Libre (Free) plan is completely free forever with no credit card required. The Pamilya and Pro plans include a 14-day free trial.',
   },
   {
-    q: 'Paano ako magbabayad? Tanggap ba ang GCash o Maya?',
-    a: 'Yes! Tumatanggap kami ng GCash, Maya, credit/debit cards, at online banking. Lahat ng popular na payment methods sa Pilipinas ay available.',
+    q: 'What payment methods do you accept?',
+    a: 'We accept GCash, Maya, credit/debit cards, and online banking. All popular payment methods in the Philippines are available.',
   },
   {
-    q: 'Puwede ko bang i-cancel anytime?',
-    a: 'Absolutely. Maaari kang mag-upgrade, mag-downgrade, o mag-cancel ng iyong plan anytime mula sa iyong account settings. Walang lock-in period.',
+    q: 'Can I cancel or change my plan anytime?',
+    a: 'Absolutely. You can upgrade, downgrade, or cancel your plan at any time from your account settings. There is no lock-in period.',
   },
   {
-    q: 'Para sa anong edad ang SpeechBud?',
-    a: 'Ang SpeechBud ay dinisenyo para sa mga batang 2–12 taong gulang. Ang aming exercises ay nag-a-adapt sa developmental stage ng bawat bata.',
+    q: 'What age group is SpeechBud designed for?',
+    a: 'SpeechBud is designed for children aged 2–12 years old. Our exercises adapt to each child\'s developmental stage.',
   },
   {
-    q: 'Paano gumagana ang AI feedback?',
-    a: 'Ang aming AI ay nakikinig sa pronunciation ng iyong anak in real time at nagbibigay ng malambot at nakakaengganyong corrections — katulad ng isang tunay na speech therapist.',
+    q: 'How does the AI pronunciation feedback work?',
+    a: 'Our AI listens to your child\'s pronunciation in real time and provides gentle, encouraging corrections — just like a real speech therapist.',
   },
   {
-    q: 'Ligtas ba ang data ng aking anak?',
-    a: 'Oo. Sumusunod kami sa Philippine Data Privacy Act (RA 10173) at gumagamit ng end-to-end encryption. Hindi namin ibinebenta ang data ng iyong pamilya.',
+    q: 'Is my child\'s data safe and private?',
+    a: 'Yes. We comply with the Philippine Data Privacy Act (RA 10173) and use end-to-end encryption. We never sell your family\'s data.',
   },
 ]
 
@@ -153,7 +153,7 @@ export default function Pricing() {
           variants={fadeUp} initial="hidden" animate="visible" custom={2}
           className="mt-4 text-lg text-slate-500 max-w-xl mx-auto"
         >
-          Walang hidden fees. Walang long-term contracts. Just results.
+          No hidden fees. No long-term contracts. Just results.
         </motion.p>
 
         {/* ==========================================
@@ -353,10 +353,10 @@ export default function Pricing() {
           className="bg-gradient-to-r from-amber-400 to-orange-400 rounded-3xl px-10 py-16 text-center shadow-xl"
         >
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-            Magsimula ng Libre. Walang Credit Card.
+            Start for Free. No Credit Card Needed.
           </h2>
           <p className="text-orange-100 text-lg max-w-xl mx-auto mb-8">
-            Samahan ang libu-libong pamilyang Pilipino na tumutulong sa kanilang mga anak na mahanap ang kanilang boses.
+            Join thousands of Filipino families helping their children find their voice.
           </p>
           <Link
             to="/"
