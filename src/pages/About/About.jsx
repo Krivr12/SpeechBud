@@ -51,7 +51,7 @@ const team = [
   {
     avatar: '👩‍💼',
     name: 'Yasmine Reign San Gabriel',
-    role: 'Project Manager',
+    role: 'Business Lead',
     bio: 'Leads overall project strategy and business development. Also spearheads marketing initiatives and digital presence to reach Filipino families nationwide.',
   },
   {
