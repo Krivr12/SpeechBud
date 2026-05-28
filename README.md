@@ -246,10 +246,10 @@ SpeechBud is designed with Philippine legal compliance at its core:
 
 | Name | Role |
 |---|---|
-| **Yasmine Reign San Gabriel** | Project Manager / Business Lead — Marketing Manager / Digital Marketing Specialist |
-| **Christopher Bryan Evangelista** | Full-Stack Developer — Backend Focus |
-| **Trisha Mae Lasanas** | AI Specialist / Cloud Engineer |
-| **Keila Tabagan** | Frontend Developer / UI-UX Designer — Full-Stack Developer (Backend Focus) |
+| **Yasmine Reign San Gabriel** | Project Manager (also leads marketing initiatives) |
+| **Christopher Bryan Evangelista** | Backend Developer |
+| **Trisha Mae Lasanas** | AI Engineer |
+| **Keila Tabagan** | Frontend Developer |
 
 ---
 

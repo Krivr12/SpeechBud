@@ -44,32 +44,32 @@ const values = [
 ]
 
 // ==========================================
-// TEAM DATA - PH-based team members with multiple roles
+// TEAM DATA - PH-based team members with consistent formatting
 // Update names, roles, avatars, and bios here
 // ==========================================
 const team = [
   {
     avatar: '👩‍💼',
     name: 'Yasmine Reign San Gabriel',
-    role: 'Project Manager / Business Lead — Marketing Manager / Digital Marketing Specialist',
-    bio: 'Leads overall project strategy and business development. Drives marketing initiatives and digital presence to reach Filipino families nationwide.',
+    role: 'Project Manager',
+    bio: 'Leads overall project strategy and business development. Also spearheads marketing initiatives and digital presence to reach Filipino families nationwide.',
   },
   {
     avatar: '👨‍💻',
     name: 'Christopher Bryan Evangelista',
-    role: 'Full-Stack Developer — Backend Focus',
+    role: 'Backend Developer',
     bio: 'Architected the backend infrastructure and API layer. Handles server-side logic, database design, and system scalability for SpeechBud.',
   },
   {
     avatar: '👩‍💻',
     name: 'Trisha Mae Lasanas',
-    role: 'AI Specialist / Cloud Engineer',
+    role: 'AI Engineer',
     bio: 'Developed the real-time pronunciation AI engine. Manages cloud infrastructure and ensures system reliability and performance.',
   },
   {
     avatar: '👩‍🎨',
     name: 'Keila Tabagan',
-    role: 'Frontend Developer / UI-UX Designer — Full-Stack Developer (Backend Focus)',
+    role: 'Frontend Developer',
     bio: 'Designed and built the responsive frontend interface. Ensures child-friendly UX and accessibility. Contributes to backend development.',
   },
 ]
@@ -350,27 +350,27 @@ export default function About() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i * 0.3}
-                className="bg-white rounded-2xl p-7 border border-stone-200 hover:shadow-lg transition-all duration-300 text-center flex flex-col h-full"
+                className="bg-white rounded-2xl p-6 border border-stone-200 hover:shadow-lg transition-all duration-300 flex flex-col h-full"
               >
                 {/* Avatar */}
-                <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-4xl mx-auto flex-shrink-0">
+                <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-4xl mx-auto mb-4">
                   {member.avatar}
                 </div>
                 
-                {/* Name - Fixed height */}
-                <h3 className="mt-4 font-black text-slate-800 text-sm leading-tight h-12 flex items-center justify-center">
+                {/* Name - Fixed height for alignment */}
+                <h3 className="font-black text-slate-800 text-center text-sm min-h-[2.5rem] flex items-center justify-center">
                   {member.name}
                 </h3>
                 
-                {/* Role badge - Fixed height */}
-                <div className="mt-2 h-10 flex items-center justify-center">
-                  <span className="inline-block bg-amber-100 text-amber-600 text-xs font-bold px-3 py-1 rounded-full">
+                {/* Role badge - Fixed height for alignment */}
+                <div className="flex justify-center my-2 min-h-[1.75rem]">
+                  <span className="inline-block bg-amber-100 text-amber-600 text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
                     {member.role}
                   </span>
                 </div>
                 
-                {/* Bio - Flexible height, grows to fill space */}
-                <p className="mt-3 text-slate-500 text-sm leading-relaxed flex-grow">
+                {/* Bio - Flex grow to fill remaining space */}
+                <p className="text-slate-500 text-sm leading-relaxed text-center flex-grow">
                   {member.bio}
                 </p>
               </motion.div>
