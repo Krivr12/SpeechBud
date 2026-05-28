@@ -80,7 +80,7 @@ export default function Contact() {
       {/* ==========================================
           CONTACT HEADER - Page title
           ========================================== */}
-      <section className="max-w-7xl mx-auto px-6 pt-20 pb-12 text-center">
+      <section className="max-w-7xl mx-auto px-6 pt-8 md:pt-20 pb-8 md:pb-12 text-center">
         <motion.span
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           className="inline-block bg-emerald-100 text-emerald-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"

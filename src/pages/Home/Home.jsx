@@ -250,7 +250,7 @@ export default function Home() {
       {/* ==========================================
           HERO SECTION - Main headline, subtext, CTA buttons
           ========================================== */}
-      <section className="max-w-7xl mx-auto px-6 pt-24 pb-20 flex flex-col items-center text-center">
+      <section className="max-w-7xl mx-auto px-6 pt-8 md:pt-24 pb-12 md:pb-20 flex flex-col items-center text-center">
 
         {/* Eyebrow badge */}
         <motion.span

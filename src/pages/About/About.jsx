@@ -139,7 +139,7 @@ export default function About() {
       {/* ==========================================
           ABOUT HERO SECTION - Page headline and intro
           ========================================== */}
-      <section className="max-w-7xl mx-auto px-6 pt-20 pb-16 text-center">
+      <section className="max-w-7xl mx-auto px-6 pt-8 md:pt-20 pb-12 md:pb-16 text-center">
         <motion.span
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           className="inline-block bg-sky-100 text-sky-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"

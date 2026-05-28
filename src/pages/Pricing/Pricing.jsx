@@ -134,7 +134,7 @@ export default function Pricing() {
       {/* ==========================================
           PRICING HEADER - Page title and billing toggle
           ========================================== */}
-      <section className="max-w-7xl mx-auto px-6 pt-20 pb-12 text-center">
+      <section className="max-w-7xl mx-auto px-6 pt-8 md:pt-20 pb-8 md:pb-12 text-center">
         <motion.span
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           className="inline-block bg-teal-100 text-teal-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
