@@ -1,0 +1,24 @@
+/* ==========================================
+   GLOBAL STYLES - Tailwind v4 import + base overrides
+   ========================================== */
+
+/* Google Fonts - Inter for clean sans-serif headings (must precede @import "tailwindcss") */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+/* ==========================================
+   BASE - Apply font and background globally
+   ========================================== */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FDFBF7; /* Soft Cream / Off-White */
+  color: #1e293b;             /* slate-800 */
+}
+
+/* ==========================================
+   SMOOTH SCROLL - Better UX for anchor links
+   ========================================== */
+html {
+  scroll-behavior: smooth;
+}
