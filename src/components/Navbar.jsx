@@ -38,36 +38,35 @@ export default function Navbar() {
         </Link>
 
         {/* ==========================================
-            MIDDLE SECTION - Desktop Nav Links
+            RIGHT SECTION - Nav Links + CTA Button (desktop)
+            All grouped on the right side
             Hidden on mobile (md:flex)
             ========================================== */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map(({ label, path }) => (
-            <li key={path}>
-              <NavLink
-                to={path}
-                className={({ isActive }) =>
-                  `text-sm font-semibold transition-colors ${
-                    isActive
-                      ? 'text-teal-600'
-                      : 'text-slate-600 hover:text-teal-600'
-                  }`
-                }
-              >
-                {label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center gap-8">
+          {/* Nav Links */}
+          <ul className="flex items-center gap-6">
+            {navLinks.map(({ label, path }) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `text-sm font-semibold transition-colors ${
+                      isActive
+                        ? 'text-teal-600'
+                        : 'text-slate-600 hover:text-teal-600'
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-        {/* ==========================================
-            RIGHT SECTION - CTA Button (desktop)
-            Update button text/link here
-            ========================================== */}
-        <div className="hidden md:block">
+          {/* CTA Button */}
           <Link
             to="/pricing"
-            className="bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md"
+            className="bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
           >
             TRY IT FOR FREE
           </Link>
