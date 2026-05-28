@@ -44,33 +44,33 @@ const values = [
 ]
 
 // ==========================================
-// TEAM DATA - PH-based team members
+// TEAM DATA - PH-based team members with multiple roles
 // Update names, roles, avatars, and bios here
 // ==========================================
 const team = [
   {
-    avatar: '👩‍⚕️',
-    name: 'Dr. Ana Reyes, ReSP',
-    role: 'Co-Founder & Chief SLP',
-    bio: 'PRC-licensed Speech-Language Pathologist with 12 years of pediatric practice in Metro Manila. Designed every core exercise in SpeechBud.',
+    avatar: '👩‍💼',
+    name: 'Yasmine Reign San Gabriel',
+    role: 'Project Manager / Business Lead — Marketing Manager / Digital Marketing Specialist',
+    bio: 'Leads overall project strategy and business development. Drives marketing initiatives and digital presence to reach Filipino families nationwide.',
   },
   {
     avatar: '👨‍💻',
-    name: 'Carlo Mendoza',
-    role: 'Co-Founder & CTO',
-    bio: 'Former AI researcher from UP Diliman. Built the real-time pronunciation engine that powers SpeechBud\'s Filipino and English feedback.',
+    name: 'Christopher Bryan Evangelista',
+    role: 'Full-Stack Developer — Backend Focus',
+    bio: 'Architected the backend infrastructure and API layer. Handles server-side logic, database design, and system scalability for SpeechBud.',
+  },
+  {
+    avatar: '👩‍💻',
+    name: 'Trisha Mae Lasanas',
+    role: 'AI Specialist / Cloud Engineer',
+    bio: 'Developed the real-time pronunciation AI engine. Manages cloud infrastructure and ensures system reliability and performance.',
   },
   {
     avatar: '👩‍🎨',
-    name: 'Bea Santos',
-    role: 'Head of Design',
-    bio: 'Specializes in child-centered UX for Filipino audiences. Makes sure SpeechBud is as delightful as it is effective.',
-  },
-  {
-    avatar: '👨‍🏫',
-    name: 'Sir Mark Villanueva',
-    role: 'Head of Education',
-    bio: 'Former DepEd SPED teacher with 10 years of experience. Ensures our content meets the needs of diverse Filipino learners.',
+    name: 'Keila Tabagan',
+    role: 'Frontend Developer / UI-UX Designer — Full-Stack Developer (Backend Focus)',
+    bio: 'Designed and built the responsive frontend interface. Ensures child-friendly UX and accessibility. Contributes to backend development.',
   },
 ]
 

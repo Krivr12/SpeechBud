@@ -246,10 +246,10 @@ SpeechBud is designed with Philippine legal compliance at its core:
 
 | Name | Role |
 |---|---|
-| **Dr. Ana Reyes, ReSP** | Co-Founder & Chief Speech-Language Pathologist |
-| **Carlo Mendoza** | Co-Founder & Chief Technology Officer |
-| **Bea Santos** | Head of Design |
-| **Sir Mark Villanueva** | Head of Education (DepEd SPED background) |
+| **Yasmine Reign San Gabriel** | Project Manager / Business Lead — Marketing Manager / Digital Marketing Specialist |
+| **Christopher Bryan Evangelista** | Full-Stack Developer — Backend Focus |
+| **Trisha Mae Lasanas** | AI Specialist / Cloud Engineer |
+| **Keila Tabagan** | Frontend Developer / UI-UX Designer — Full-Stack Developer (Backend Focus) |
 
 ---
 
