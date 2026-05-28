@@ -350,20 +350,29 @@ export default function About() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i * 0.3}
-                className="bg-white rounded-2xl p-7 border border-stone-200 hover:shadow-lg transition-all duration-300 text-center"
+                className="bg-white rounded-2xl p-7 border border-stone-200 hover:shadow-lg transition-all duration-300 text-center flex flex-col h-full"
               >
                 {/* Avatar */}
-                <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-4xl mx-auto">
+                <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-4xl mx-auto flex-shrink-0">
                   {member.avatar}
                 </div>
-                {/* Name */}
-                <h3 className="mt-4 font-black text-slate-800">{member.name}</h3>
-                {/* Role badge */}
-                <span className="inline-block mt-1 bg-amber-100 text-amber-600 text-xs font-bold px-3 py-1 rounded-full">
-                  {member.role}
-                </span>
-                {/* Bio */}
-                <p className="mt-3 text-slate-500 text-sm leading-relaxed">{member.bio}</p>
+                
+                {/* Name - Fixed height */}
+                <h3 className="mt-4 font-black text-slate-800 text-sm leading-tight h-12 flex items-center justify-center">
+                  {member.name}
+                </h3>
+                
+                {/* Role badge - Fixed height */}
+                <div className="mt-2 h-10 flex items-center justify-center">
+                  <span className="inline-block bg-amber-100 text-amber-600 text-xs font-bold px-3 py-1 rounded-full">
+                    {member.role}
+                  </span>
+                </div>
+                
+                {/* Bio - Flexible height, grows to fill space */}
+                <p className="mt-3 text-slate-500 text-sm leading-relaxed flex-grow">
+                  {member.bio}
+                </p>
               </motion.div>
             ))}
           </div>
