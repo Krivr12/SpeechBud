@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../../lib/supabase'
+import HomePageIMG from '../../assets/HomePageIMG.jpg'
 
 // ==========================================
 // ANIMATION VARIANTS - Reusable fade-up motion configs
@@ -365,7 +366,7 @@ export default function Home() {
           className="mt-16 w-full max-w-4xl rounded-3xl overflow-hidden shadow-xl border border-stone-200 h-80 md:h-[420px]"
         >
           <img
-            src="/src/assets/HomePageIMG.jpg"
+            src={HomePageIMG}
             alt="Happy Filipino family with children outdoors"
             className="w-full h-full object-cover object-center"
           />

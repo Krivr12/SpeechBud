@@ -4,6 +4,7 @@
 // ==========================================
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import AboutPageIMG from '../../assets/AboutPageIMG.jpg'
 
 // ==========================================
 // ANIMATION VARIANTS - Fade-up stagger
@@ -198,7 +199,7 @@ export default function About() {
             className="rounded-3xl overflow-hidden h-80 shadow-lg border border-stone-200"
           >
             <img
-              src="/src/assets/AboutPageIMG.jpg"
+              src={AboutPageIMG}
               alt="Filipino family enjoying time together outdoors"
               className="w-full h-full object-cover object-center"
             />

@@ -6,6 +6,7 @@
 import { motion } from 'framer-motion'
 import { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
+import ContactPageIMG from '../../assets/ContactPageIMG.jpg'
 
 // ==========================================
 // ANIMATION VARIANTS - Fade-up stagger
@@ -329,7 +330,7 @@ export default function Contact() {
             {/* Contact illustration */}
             <div className="rounded-3xl overflow-hidden h-56 border border-stone-200 shadow-sm">
               <img
-                src="/src/assets/ContactPageIMG.jpg"
+                src={ContactPageIMG}
                 alt="Friendly Filipino family smiling together"
                 className="w-full h-full object-cover object-center"
               />
