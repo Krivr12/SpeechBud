@@ -359,13 +359,16 @@ export default function Home() {
           Trusted by <span className="font-bold text-slate-600">Filipino families</span> nationwide · Walang credit card na kailangan
         </motion.p>
 
-        {/* Hero illustration placeholder */}
+        {/* Hero image */}
         <motion.div
           variants={fadeUp} initial="hidden" animate="visible" custom={5}
-          className="mt-16 w-full max-w-4xl rounded-3xl bg-gradient-to-br from-teal-100 via-sky-100 to-amber-50 h-80 md:h-[420px] flex items-center justify-center shadow-xl border border-stone-200"
+          className="mt-16 w-full max-w-4xl rounded-3xl overflow-hidden shadow-xl border border-stone-200 h-80 md:h-[420px]"
         >
-          <span className="text-8xl">🗣️</span>
-          {/* TODO: Replace with <img src="..." alt="SpeechBud app screenshot" /> */}
+          <img
+            src="/src/assets/HomePageIMG.jpg"
+            alt="Happy Filipino family with children outdoors"
+            className="w-full h-full object-cover object-center"
+          />
         </motion.div>
       </section>
 

@@ -192,13 +192,16 @@ export default function About() {
       <section className="max-w-7xl mx-auto px-6 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
-          {/* Illustration placeholder */}
+          {/* Mission illustration */}
           <motion.div
             variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="bg-gradient-to-br from-amber-100 to-teal-100 rounded-3xl h-80 flex items-center justify-center shadow-lg border border-stone-200"
+            className="rounded-3xl overflow-hidden h-80 shadow-lg border border-stone-200"
           >
-            <span className="text-8xl">🌱</span>
-            {/* TODO: Replace with <img src="..." alt="Our mission illustration" /> */}
+            <img
+              src="/src/assets/AboutPageIMG.jpg"
+              alt="Filipino family enjoying time together outdoors"
+              className="w-full h-full object-cover object-center"
+            />
           </motion.div>
 
           {/* Mission text */}

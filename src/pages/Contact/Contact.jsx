@@ -326,10 +326,13 @@ export default function Contact() {
             variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
             className="flex flex-col gap-6"
           >
-            {/* Illustration placeholder */}
-            <div className="bg-gradient-to-br from-teal-100 to-sky-100 rounded-3xl h-56 flex items-center justify-center border border-stone-200 shadow-sm">
-              <span className="text-8xl">💌</span>
-              {/* TODO: Replace with <img src="..." alt="Contact illustration" /> */}
+            {/* Contact illustration */}
+            <div className="rounded-3xl overflow-hidden h-56 border border-stone-200 shadow-sm">
+              <img
+                src="/src/assets/ContactPageIMG.jpg"
+                alt="Friendly Filipino family smiling together"
+                className="w-full h-full object-cover object-center"
+              />
             </div>
 
             {/* SLP Partnership card */}
