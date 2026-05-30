@@ -1,10 +1,12 @@
 // ==========================================
 // HOME PAGE - Landing page for SpeechBud (PH Context)
 // Sections: Hero | Partners Strip | Features | How It Works | Testimonials Carousel | CTA Banner
+// Testimonials are fetched live from Supabase
 // ==========================================
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
+import { supabase } from '../../lib/supabase'
 
 // ==========================================
 // ANIMATION VARIANTS - Reusable fade-up motion configs
@@ -81,78 +83,115 @@ const steps = [
 ]
 
 // ==========================================
-// TESTIMONIALS DATA - Mixed English, Tagalog, Taglish
-// Mostly parents, with SLP and SPED teacher included
-// Update quotes, names, roles, and avatars here
+// PH PARTNER ORGANIZATIONS DATA
+// Real PH/SEA organizations — update links/descriptions here
 // ==========================================
-const testimonials = [
+const partners = [
+  { name: 'PASP',            full: 'Philippine Association of Speech-Language Pathologists', url: 'https://www.pasp.org.ph' },
+  { name: 'Autism Society PH', full: 'Autism Society Philippines',                          url: 'http://www.autismsocietyphilippines.org' },
+  { name: 'DepEd SPED',      full: 'Department of Education — Special Education Program',   url: 'https://www.deped.gov.ph' },
+  { name: 'SEAMEO SEN',      full: 'SEAMEO Regional Centre for Special Educational Needs',  url: 'https://seameosen.edu.my' },
+  { name: 'PRC',             full: 'Professional Regulation Commission',                    url: 'https://www.prc.gov.ph' },
+]
+
+// ==========================================
+// FALLBACK TESTIMONIALS - Shown while Supabase loads or if fetch fails
+// Mirrors the seed data in supabase/schema.sql
+// ==========================================
+const fallbackTestimonials = [
   {
     quote: 'Dati ayaw na ayaw ng anak ko mag-practice. Ngayon, siya pa mismo ang nagbubukas ng SpeechBud bago pa ako makapagsabi. Grabe ang improvement niya in just 2 months!',
     name: 'Ate Maricel S.',
     role: 'Nanay ng 5-taong-gulang, Quezon City',
     avatar: '👩',
+    stars: 5,
   },
   {
     quote: 'As a licensed SLP here in the Philippines, I\'m impressed by how accurate the AI feedback is. I now recommend SpeechBud to families who can\'t afford weekly clinic sessions.',
     name: 'Ma\'am Kristine D., ReSP',
     role: 'PRC-Licensed Speech-Language Pathologist, Makati',
     avatar: '👩‍⚕️',
+    stars: 5,
   },
   {
     quote: 'My son has autism and we\'ve been struggling to find affordable therapy in our area. SpeechBud has been a blessing — the exercises are fun and he actually looks forward to them.',
     name: 'Kuya Rodel M.',
     role: 'Parent of a 7-year-old, Cebu City',
     avatar: '👨',
+    stars: 5,
   },
   {
     quote: 'Bilang SPED teacher, I use SpeechBud as a supplement for my students. The progress reports help me coordinate better with parents and adjust my classroom strategies.',
     name: 'Teacher Liza A.',
     role: 'SPED Teacher, DepEd Pasig City',
     avatar: '👩‍🏫',
+    stars: 5,
   },
   {
     quote: 'Hindi ako makapaniwala na ganito ka-affordable. Ang isang session sa clinic ay ₱800 to ₱1,500 — dito sa SpeechBud, unlimited na ang exercises ng anak ko for less than that per month!',
     name: 'Nanay Josie R.',
     role: 'Nanay ng 4-taong-gulang, Davao City',
     avatar: '👩‍👧',
+    stars: 5,
   },
   {
     quote: 'We live in a province where there are no SLP clinics nearby. SpeechBud literally changed our lives. My daughter can now say full sentences clearly — something we thought would take years.',
     name: 'Tatay Arnel C.',
     role: 'Parent of a 6-year-old, Iloilo',
     avatar: '👨‍👧',
+    stars: 5,
   },
   {
     quote: 'Ang lola ko pa ang nagturo sa akin kung paano gamitin ang SpeechBud para sa apo namin. Madaling gamitin, kahit hindi tech-savvy. Sobrang helpful ng progress reports!',
     name: 'Lola Nena B.',
     role: 'Lola ng 5-taong-gulang, Batangas',
     avatar: '👵',
+    stars: 5,
   },
 ]
 
 // ==========================================
-// PH PARTNER ORGANIZATIONS DATA
-// Real PH/SEA organizations — update links/descriptions here
-// ==========================================
-const partners = [
-  { name: 'PASP', full: 'Philippine Association of Speech-Language Pathologists', url: 'https://www.pasp.org.ph' },
-  { name: 'Autism Society PH', full: 'Autism Society Philippines', url: 'http://www.autismsocietyphilippines.org' },
-  { name: 'DepEd SPED', full: 'Department of Education — Special Education Program', url: 'https://www.deped.gov.ph' },
-  { name: 'SEAMEO SEN', full: 'SEAMEO Regional Centre for Special Educational Needs', url: 'https://seameosen.edu.my' },
-  { name: 'PRC', full: 'Professional Regulation Commission', url: 'https://www.prc.gov.ph' },
-]
-
-// ==========================================
 // TESTIMONIAL CAROUSEL COMPONENT
+// Fetches testimonials from Supabase on mount
+// Falls back to hardcoded data if fetch fails
 // Auto-slides every 4 seconds; manual prev/next + dot controls
 // ==========================================
 function TestimonialCarousel() {
-  const [current, setCurrent] = useState(0)
+  // ==========================================
+  // STATE - testimonials list, loading, current slide
+  // ==========================================
+  const [testimonials, setTestimonials] = useState(fallbackTestimonials)
+  const [loading, setLoading]           = useState(true)
+  const [current, setCurrent]           = useState(0)
+
+  // ==========================================
+  // SUPABASE FETCH - Load approved testimonials on mount
+  // Falls back to hardcoded data on error
+  // ==========================================
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const { data, error } = await supabase
+          .from('testimonials')
+          .select('id, quote, name, role, avatar, stars')
+          .eq('is_approved', true)
+          .order('created_at', { ascending: true })
+
+        if (error) throw error
+        if (data && data.length > 0) setTestimonials(data)
+      } catch (err) {
+        console.warn('[SpeechBud] Could not fetch testimonials from Supabase, using fallback.', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchTestimonials()
+  }, [])
+
   const total = testimonials.length
 
   // ==========================================
   // AUTO-SLIDE LOGIC - Advances every 4000ms
-  // Resets timer on manual navigation
   // ==========================================
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % total)
@@ -163,9 +202,24 @@ function TestimonialCarousel() {
   }, [total])
 
   useEffect(() => {
+    if (loading) return // Don't start timer until data is ready
     const timer = setInterval(next, 4000)
-    return () => clearInterval(timer) // Cleanup on unmount or re-render
-  }, [next])
+    return () => clearInterval(timer)
+  }, [next, loading])
+
+  // ==========================================
+  // LOADING SKELETON - Shown while fetching from Supabase
+  // ==========================================
+  if (loading) {
+    return (
+      <div className="max-w-3xl mx-auto bg-white rounded-3xl p-10 border border-stone-200 shadow-md min-h-[220px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-teal-400 border-t-transparent rounded-full animate-spin" />
+          <p className="text-slate-400 text-sm">Loading testimonials...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative max-w-3xl mx-auto">
@@ -174,16 +228,18 @@ function TestimonialCarousel() {
           CAROUSEL CARD - Animated slide transition
           ========================================== */}
       <motion.div
-        key={current} // Re-triggers animation on slide change
+        key={current}
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -40 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="bg-white rounded-3xl p-10 border border-stone-200 shadow-md min-h-[220px] flex flex-col justify-between"
       >
-        {/* Star rating */}
+        {/* ==========================================
+            STAR RATING - Rendered from DB stars field (1–5)
+            ========================================== */}
         <div className="flex gap-1 mb-4">
-          {[...Array(5)].map((_, s) => (
+          {[...Array(testimonials[current].stars ?? 5)].map((_, s) => (
             <span key={s} className="text-amber-400 text-lg">★</span>
           ))}
         </div>
@@ -223,7 +279,6 @@ function TestimonialCarousel() {
 
       {/* ==========================================
           DOT INDICATORS - One dot per testimonial
-          Active dot is teal, inactive are grey
           ========================================== */}
       <div className="flex justify-center gap-2 mt-6">
         {testimonials.map((_, i) => (
@@ -243,6 +298,9 @@ function TestimonialCarousel() {
   )
 }
 
+// ==========================================
+// HOME PAGE - Main export
+// ==========================================
 export default function Home() {
   return (
     <div>
@@ -252,7 +310,6 @@ export default function Home() {
           ========================================== */}
       <section className="max-w-7xl mx-auto px-6 pt-8 md:pt-24 pb-12 md:pb-20 flex flex-col items-center text-center">
 
-        {/* Eyebrow badge */}
         <motion.span
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           className="inline-block bg-amber-100 text-amber-600 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
@@ -260,7 +317,6 @@ export default function Home() {
           🌟 AI-Powered Speech Therapy for Filipino Kids
         </motion.span>
 
-        {/* Main headline */}
         <motion.h1
           variants={fadeUp} initial="hidden" animate="visible" custom={1}
           className="text-5xl md:text-7xl font-black text-slate-800 leading-tight max-w-4xl"
@@ -270,7 +326,6 @@ export default function Home() {
           One Word at a Time.
         </motion.h1>
 
-        {/* Subheadline */}
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={2}
           className="mt-6 text-lg md:text-xl text-slate-500 max-w-2xl leading-relaxed"
@@ -279,7 +334,6 @@ export default function Home() {
           with AI-powered exercises designed by PRC-licensed therapists and loved by kids across the Philippines.
         </motion.p>
 
-        {/* CTA Buttons */}
         <motion.div
           variants={fadeUp} initial="hidden" animate="visible" custom={3}
           className="mt-10 flex flex-col sm:flex-row gap-4"
@@ -298,7 +352,6 @@ export default function Home() {
           </Link>
         </motion.div>
 
-        {/* Social proof micro-copy */}
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={4}
           className="mt-6 text-sm text-slate-400"
@@ -306,21 +359,18 @@ export default function Home() {
           Trusted by <span className="font-bold text-slate-600">Filipino families</span> nationwide · Walang credit card na kailangan
         </motion.p>
 
-        {/* ==========================================
-            HERO ILLUSTRATION - Replace src with real image
-            ========================================== */}
+        {/* Hero illustration placeholder */}
         <motion.div
           variants={fadeUp} initial="hidden" animate="visible" custom={5}
           className="mt-16 w-full max-w-4xl rounded-3xl bg-gradient-to-br from-teal-100 via-sky-100 to-amber-50 h-80 md:h-[420px] flex items-center justify-center shadow-xl border border-stone-200"
         >
           <span className="text-8xl">🗣️</span>
-          {/* TODO: Replace this placeholder with <img src="..." alt="SpeechBud app screenshot" /> */}
+          {/* TODO: Replace with <img src="..." alt="SpeechBud app screenshot" /> */}
         </motion.div>
       </section>
 
       {/* ==========================================
           PARTNER ORGANIZATIONS STRIP
-          Real PH/SEA organizations — names link to their official sites
           ========================================== */}
       <section className="bg-stone-100 border-y border-stone-200 py-8">
         <div className="max-w-7xl mx-auto px-6">
@@ -348,8 +398,6 @@ export default function Home() {
           FEATURES SECTION - 6-card grid
           ========================================== */}
       <section className="max-w-7xl mx-auto px-6 py-24">
-
-        {/* Section header */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="text-center mb-16"
@@ -363,7 +411,6 @@ export default function Home() {
           </p>
         </motion.div>
 
-        {/* Features grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((f, i) => (
             <motion.div
@@ -375,11 +422,8 @@ export default function Home() {
               custom={i * 0.5}
               className="bg-white rounded-2xl p-8 border border-stone-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300"
             >
-              {/* Feature icon */}
               <span className="text-4xl">{f.icon}</span>
-              {/* Feature title */}
               <h3 className="mt-4 text-lg font-bold text-slate-800">{f.title}</h3>
-              {/* Feature description */}
               <p className="mt-2 text-slate-500 text-sm leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
@@ -391,8 +435,6 @@ export default function Home() {
           ========================================== */}
       <section className="bg-teal-600 py-24">
         <div className="max-w-7xl mx-auto px-6">
-
-          {/* Section header */}
           <motion.div
             variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
             className="text-center mb-16"
@@ -403,7 +445,6 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          {/* Steps grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, i) => (
               <motion.div
@@ -415,7 +456,6 @@ export default function Home() {
                 custom={i * 0.5}
                 className="text-center"
               >
-                {/* Step number badge */}
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/20 text-white font-black text-xl mb-4">
                   {step.number}
                 </div>
@@ -428,13 +468,11 @@ export default function Home() {
       </section>
 
       {/* ==========================================
-          TESTIMONIALS SECTION - Auto-sliding carousel
-          7 testimonials: parents, SLP, SPED teacher, lola
-          Mixed English / Tagalog / Taglish
+          TESTIMONIALS SECTION - Supabase-powered carousel
+          Data fetched from: supabase → testimonials table
+          Fallback: hardcoded data if Supabase is unavailable
           ========================================== */}
       <section className="max-w-7xl mx-auto px-6 py-24">
-
-        {/* Section header */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="text-center mb-14"
@@ -448,7 +486,6 @@ export default function Home() {
           </p>
         </motion.div>
 
-        {/* Carousel component */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
         >
@@ -457,14 +494,13 @@ export default function Home() {
       </section>
 
       {/* ==========================================
-          CTA BANNER SECTION - Bottom conversion section
+          CTA BANNER SECTION
           ========================================== */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="bg-gradient-to-r from-teal-500 to-sky-500 rounded-3xl px-10 py-16 text-center shadow-xl"
         >
-          {/* Tagline */}
           <p className="text-teal-100 font-semibold text-sm uppercase tracking-widest mb-3">
             No stress. Just growth.
           </p>
